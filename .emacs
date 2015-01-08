@@ -48,7 +48,7 @@
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 (global-set-key "\C-c\C-m" 'execute-extended-command)
 (add-to-list 'default-frame-alist
-	     '(font . "meno-regular-12"))
+	     '(font . "menlo-regular-12"))
 
 (fset 'perl-mode 'cperl-mode)
 (add-hook 'cperl-mode-hook 'tmp/change-indent-oicr)
