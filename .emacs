@@ -12,6 +12,19 @@
 
 (column-number-mode 1)
 
+; nobody wants to me nagged by a blinking cursor
+(blink-cursor-mode 0)
+
+; no more ear bleeding beeps or annoying block on the screen
+(setq ring-bell-function 'ignore)
+
+; no more scroll bar
+(scroll-bar-mode 0)
+
+; get rid of useless menus
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+
 (defun tmp/change-indent-oicr ()
   (interactive)
   (setq indent-tabs-mode t)
@@ -40,6 +53,18 @@
 (fset 'perl-mode 'cperl-mode)
 (add-hook 'cperl-mode-hook 'tmp/change-indent-oicr)
 
+; I have a modern laptop, increase gc threshold
+(setq gc-cons-threshold 20000000)
+
+; Set a better window size
+
+; Nice size for the default window
+(defun get-default-height ()
+  (/ (- (display-pixel-height) 120)
+	 (frame-char-height)))
+(add-to-list 'default-frame-alist '(width . 190))
+(add-to-list 'default-frame-alist (cons 'height (get-default-height)))
+
 ; stored ssh places
 (defun ssh-blhn ()
   (interactive)
@@ -63,20 +88,25 @@
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
+(dolist (hook '(latex-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
  '(background-color "#042028")
  '(background-mode dark)
  '(cursor-color "#708183")
- '(custom-enabled-themes (quote (zenburn)))
+ '(custom-enabled-themes (quote (ample)))
  '(custom-safe-themes
    (quote
-    ("058eeda70c6a8e702da4c7037c582f727887f5ab49a401247eac40aece97060d" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "2cc9ecf74dd307cdf856a2f47f6149583d6cca9616a0f4ecc058bafa57e4ffa3" "7a00b0710bb2e400d33a925f94b1cd8cfa2281f864ac9506b9046703e0045d66" "68cdf52ba0081b876e926ebbad36f308405178d13335ccbb5bc41b9e94028a65" "ffbc43cd2b8c0f11d6093575bd9b34fa95cdc1366939d37aef309b7d90b340fe" "451d4d48b28ac3195fcfc0f4e42c294b6fda8b7e10b37f48b72e6d974a67834f" default)))
+    ("49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" "058eeda70c6a8e702da4c7037c582f727887f5ab49a401247eac40aece97060d" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "2cc9ecf74dd307cdf856a2f47f6149583d6cca9616a0f4ecc058bafa57e4ffa3" "7a00b0710bb2e400d33a925f94b1cd8cfa2281f864ac9506b9046703e0045d66" "68cdf52ba0081b876e926ebbad36f308405178d13335ccbb5bc41b9e94028a65" "ffbc43cd2b8c0f11d6093575bd9b34fa95cdc1366939d37aef309b7d90b340fe" "451d4d48b28ac3195fcfc0f4e42c294b6fda8b7e10b37f48b72e6d974a67834f" default)))
  '(fci-rule-color "#383838")
  '(foreground-color "#708183")
  '(vc-annotate-background "#2B2B2B")
