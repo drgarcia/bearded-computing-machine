@@ -1,27 +1,35 @@
-; Include these folders
+;; basic formatting
+;; always use spaces
+(setq-default indent-tabs-mode nil)
+(setq-default c-basic-offset 4)
+;; Include these folders
 (let ((default-directory (expand-file-name "~/.emacs.d/include/")))
   (normal-top-level-add-subdirs-to-load-path))
+
+;; disable that fucking emacs logo startup
+(setq inhibit-startup-message t)
+
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/include/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/include/themes/emacs-color-theme-solarized")
 
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "gray10")
+;(set-face-background 'hl-line "gray80")
 (set-face-foreground 'highlight nil)
 (interactive)
 
 (column-number-mode 1)
 
-; nobody wants to me nagged by a blinking cursor
+;; nobody wants to be nagged by a blinking cursor
 (blink-cursor-mode 0)
 
-; no more ear bleeding beeps or annoying block on the screen
+;; no more ear bleeding beeps or annoying block on the screen
 (setq ring-bell-function 'ignore)
 
-; no more scroll bar
+;; no more scroll bar
 (scroll-bar-mode 0)
 
-; get rid of useless menus
+;; get rid of useless menus
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 
@@ -48,35 +56,22 @@
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 (global-set-key "\C-c\C-m" 'execute-extended-command)
 (add-to-list 'default-frame-alist
-	     '(font . "meno-regular-12"))
+	     '(font . "menlo-regular-12"))
 
 (fset 'perl-mode 'cperl-mode)
 (add-hook 'cperl-mode-hook 'tmp/change-indent-oicr)
 
-; I have a modern laptop, increase gc threshold
+;; I have a modern laptop, increase gc threshold
 (setq gc-cons-threshold 20000000)
 
-; Set a better window size
+;; Set a better window size
 
-; Nice size for the default window
+;; Nice size for the default window
 (defun get-default-height ()
   (/ (- (display-pixel-height) 120)
 	 (frame-char-height)))
 (add-to-list 'default-frame-alist '(width . 190))
 (add-to-list 'default-frame-alist (cons 'height (get-default-height)))
-
-; stored ssh places
-(defun ssh-blhn ()
-  (interactive)
-  (find-file "/ssh:dgarcia@chickenwire.oicr.on.ca|ssh:dgarcia@blhn.hpc.oicr.on.ca:/u/dgarcia/"))
-
-(defun fs-present ()
-  (interactive)
-  (find-file "/ssh:dgarcia@chickenwire.oicr.on.ca:/u/dgarcia/presentate"))
-
-(defun fs-pipeline ()
-  (interactive)
-  (find-file "/ssh:dgarcia@chickenwire.oicr.on.ca:/u/dgarcia/svn-new/BoutrosLab/CPC-GENE/Microarrays/OncoScan/pipeline_analysis/branch/pipeline_refactor/"))
 
 ; Using in Emacs 24.0
 (when (>= emacs-major-version 24)
@@ -85,11 +80,29 @@
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
   )
 
+; style I want to use in c++ mode
+(c-add-style "my-style" 
+	     '("stroustrup"
+	       (indent-tabs-mode . nil)        ; use spaces rather than tabs
+	       (c-basic-offset . 4) ))
+
+(defun my-c++-mode-hook ()
+  (c-set-style "my-style"))
+
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
 (dolist (hook '(latex-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
+
+; org mode
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+(setq org-agenda-files (quote ("~/org"))) ; where all org todo files go.
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -103,10 +116,10 @@
  '(background-color "#042028")
  '(background-mode dark)
  '(cursor-color "#708183")
- '(custom-enabled-themes (quote (ample)))
+ '(custom-enabled-themes (quote (cyberpunk)))
  '(custom-safe-themes
    (quote
-    ("49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" "058eeda70c6a8e702da4c7037c582f727887f5ab49a401247eac40aece97060d" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "2cc9ecf74dd307cdf856a2f47f6149583d6cca9616a0f4ecc058bafa57e4ffa3" "7a00b0710bb2e400d33a925f94b1cd8cfa2281f864ac9506b9046703e0045d66" "68cdf52ba0081b876e926ebbad36f308405178d13335ccbb5bc41b9e94028a65" "ffbc43cd2b8c0f11d6093575bd9b34fa95cdc1366939d37aef309b7d90b340fe" "451d4d48b28ac3195fcfc0f4e42c294b6fda8b7e10b37f48b72e6d974a67834f" default)))
+    ("8d6fb24169d94df45422617a1dfabf15ca42a97d594d28b3584dc6db711e0e0b" "08efabe5a8f3827508634a3ceed33fa06b9daeef9c70a24218b70494acdf7855" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" "058eeda70c6a8e702da4c7037c582f727887f5ab49a401247eac40aece97060d" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "2cc9ecf74dd307cdf856a2f47f6149583d6cca9616a0f4ecc058bafa57e4ffa3" "7a00b0710bb2e400d33a925f94b1cd8cfa2281f864ac9506b9046703e0045d66" "68cdf52ba0081b876e926ebbad36f308405178d13335ccbb5bc41b9e94028a65" "ffbc43cd2b8c0f11d6093575bd9b34fa95cdc1366939d37aef309b7d90b340fe" "451d4d48b28ac3195fcfc0f4e42c294b6fda8b7e10b37f48b72e6d974a67834f" default)))
  '(fci-rule-color "#383838")
  '(foreground-color "#708183")
  '(vc-annotate-background "#2B2B2B")
