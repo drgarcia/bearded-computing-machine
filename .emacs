@@ -9,6 +9,11 @@
 ;; disable that fucking emacs logo startup
 (setq inhibit-startup-message t)
 
+;; show matching parens
+(show-paren-mode t)
+
+;; instead of typing yes or no type y or n.
+(fset 'yes-or-no-p 'y-or-n-p)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/include/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/include/themes/emacs-color-theme-solarized")
@@ -102,7 +107,7 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
-(setq org-agenda-files (quote ("~/org"))) ; where all org todo files go.
+(setq org-agenda-files (quote ("~/git/org"))) ; where all org todo files go.
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -116,10 +121,10 @@
  '(background-color "#042028")
  '(background-mode dark)
  '(cursor-color "#708183")
- '(custom-enabled-themes (quote (cyberpunk)))
+ '(custom-enabled-themes (quote (gandalf)))
  '(custom-safe-themes
    (quote
-    ("8d6fb24169d94df45422617a1dfabf15ca42a97d594d28b3584dc6db711e0e0b" "08efabe5a8f3827508634a3ceed33fa06b9daeef9c70a24218b70494acdf7855" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" "058eeda70c6a8e702da4c7037c582f727887f5ab49a401247eac40aece97060d" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "2cc9ecf74dd307cdf856a2f47f6149583d6cca9616a0f4ecc058bafa57e4ffa3" "7a00b0710bb2e400d33a925f94b1cd8cfa2281f864ac9506b9046703e0045d66" "68cdf52ba0081b876e926ebbad36f308405178d13335ccbb5bc41b9e94028a65" "ffbc43cd2b8c0f11d6093575bd9b34fa95cdc1366939d37aef309b7d90b340fe" "451d4d48b28ac3195fcfc0f4e42c294b6fda8b7e10b37f48b72e6d974a67834f" default)))
+    ("c739f435660ca9d9e77312cbb878d5d7fd31e386a7758c982fa54a49ffd47f6e" "8d6fb24169d94df45422617a1dfabf15ca42a97d594d28b3584dc6db711e0e0b" "08efabe5a8f3827508634a3ceed33fa06b9daeef9c70a24218b70494acdf7855" "49eea2857afb24808915643b1b5bd093eefb35424c758f502e98a03d0d3df4b1" "058eeda70c6a8e702da4c7037c582f727887f5ab49a401247eac40aece97060d" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "2cc9ecf74dd307cdf856a2f47f6149583d6cca9616a0f4ecc058bafa57e4ffa3" "7a00b0710bb2e400d33a925f94b1cd8cfa2281f864ac9506b9046703e0045d66" "68cdf52ba0081b876e926ebbad36f308405178d13335ccbb5bc41b9e94028a65" "ffbc43cd2b8c0f11d6093575bd9b34fa95cdc1366939d37aef309b7d90b340fe" "451d4d48b28ac3195fcfc0f4e42c294b6fda8b7e10b37f48b72e6d974a67834f" default)))
  '(fci-rule-color "#383838")
  '(foreground-color "#708183")
  '(vc-annotate-background "#2B2B2B")
